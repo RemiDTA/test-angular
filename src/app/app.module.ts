@@ -22,7 +22,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Permet de gérer ngModel
-    HttpClientModule // Permet de gérer les requêtes HTTP
+    HttpClientModule, // Permet de gérer les requêtes HTTP
   ],
   providers: [],
   bootstrap: [AppComponent]

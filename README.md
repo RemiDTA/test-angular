@@ -1,4 +1,13 @@
 # TestAngular
+Ce projet front se lance en duo avec le back projet_test_springboot (https://github.com/RemiDTA/projet_test_springboot) et nécessite donc que projet_test_springboot soit lancé avant de lancer ce projet (cf le readme https://github.com/RemiDTA/projet_test_springboot#readme pour voir quels sont les prérequis du back office).
+
+Les prérequis du front sont les suivants (en plus de ceux du back) :
+Télécharger Node.js et npm (npm est inclu dans node normalement) => permet de générer un serveur front local (npm permet d'installer des packages un peut comme maven)
+Télécharger angular cli (npm install -g @angular/cli) => permet via des lignes de commandes de générés des templates de code (des composants, des services, ...)
+Télécharger l'IDE VisualCodeStrudio
+
+Executer "ng serve" depuis la ligne de commande du terminal de Visual Code studio pour lancer le server front sur le port 42000.
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
 
