@@ -10,15 +10,14 @@ export class AuthService {
   /** 
    * Addresse du BO (le front s'execute sur un port différent, il faut donc donner l'addresse complète)
   */
-  private baseUrl ='/api';
+  private baseUrl ='/proxy';
 
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
     console.log("login", username, password);
     // Envoyez la demande POST vers l'URL de connexion
-    let urlComplete = `v1/login`;
-    console.log(urlComplete);
+    let urlComplete = `${this.baseUrl}/login`;
     let retour = this.http.post(urlComplete, { username, password });
     retour.subscribe(
       (data : any) => {
