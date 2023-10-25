@@ -10,7 +10,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 const routes: Routes = [
   { path: 'users', component: UserListComponent },
   { path: 'user/:id', component: UserDetailComponent },
-  {path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent },
   //La redirection doit être la dernière ligne
   { path: '**', redirectTo: '/login', pathMatch: 'full' } // Rediriger vers /login par défaut
 ];

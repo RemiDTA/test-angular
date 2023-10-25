@@ -5,6 +5,8 @@ Les prérequis du front sont les suivants (en plus de ceux du back) :
 Télécharger Node.js et npm (npm est inclu dans node normalement) => permet de générer un serveur front local (npm permet d'installer des packages un peut comme maven)
 Télécharger angular cli (npm install -g @angular/cli) => permet via des lignes de commandes de générés des templates de code (des composants, des services, ...)
 Télécharger l'IDE VisualCodeStrudio
+Télécharger les bibliothèques nécessaire, pour ce faire executer depuis le terminal VSC les commandes suivantes :
+npm install ngx-cookie-service --save
 
 Executer "ng serve" depuis la ligne de commande du terminal de Visual Code studio pour lancer le server front sur le port 42000.
 

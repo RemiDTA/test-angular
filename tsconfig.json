@@ -24,6 +24,7 @@
       "dom"
     ]
   },
+  "types": ["rxjs"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
