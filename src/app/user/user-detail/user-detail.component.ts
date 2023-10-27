@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
-import { API_URLS } from '../../constants';
+import { API_URLS, API_SOUS_URLS } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { forkJoin , Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class UserDetailComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  userTrouver : boolean = false;
+  userTrouver : boolean = true;
 
   telephone : string = '';
 
@@ -24,35 +24,50 @@ export class UserDetailComponent {
 
   email : string = '';
 
-  projet : string = '';
+  equipe : string = '';
+
+  nomProjets : Array<string> = new Array<string>();
 
 constructor(private authService : AuthService, private route: ActivatedRoute){
   
-  let inscription = this.route.params.subscribe(params => {
+  let inscription = this.route.params.subscribe((params : any) => {
     let idCourant = params['id'];
-    let inscriptionHttp = authService.doGet(`${API_URLS.USER_URL}/${idCourant}`).subscribe(
-      
-      (data : any) => {
-        this.telephone = data.telephone;
-        this.prenom = data.prenom;
-        this.nom = data.nom;
-        this.email = data.email;
-        //Ca n'a pas trop de sens fonctionnellement puisque ca ne respecte pas notre MDD vu qu'un user peut être associé à plusieurs projets
-        if (data.projets[0]) {
-          this.projet = data.projets[0].nomProjet;
+    
+    let inscriptionHttpUser = forkJoin([
+      authService.doGet(`${API_URLS.USER_URL}/${idCourant}`),
+      authService.doGet(`${API_URLS.USER_URL}/${idCourant}${API_SOUS_URLS.TEAM_SOUS_URL}`)
+    ]).subscribe ((tableauDonnees : any) => {
+        let donneeUtilisateur = tableauDonnees[0];
+        let donneeEquipe = tableauDonnees[1];
+
+        this.telephone = donneeUtilisateur.telephone;
+        this.prenom = donneeUtilisateur.prenom;
+        this.nom = donneeUtilisateur.nom;
+        this.email = donneeUtilisateur.email;
+
+        if (donneeUtilisateur.projets[0]) {
+          donneeUtilisateur.projets.forEach((element : any)=> {
+            this.nomProjets.push(element.nomProjet);
+          });
         } else {
-          this.projet = 'Aucun projet associé';
+          this.nomProjets.push('Aucun projet associé');
         }
-        // Gérer la réponse réussie ici
-        console.log('data :', data);
+
+        if (donneeEquipe){
+          this.equipe = donneeEquipe.description;
+        } else {
+          this.equipe = 'Aucune équipe associée';
+        }
+
+        console.log('donneeUtilisateur :', donneeUtilisateur);
+        console.log('donneeEquipe :', donneeEquipe);
       },
       (error : any) => {
         this.userTrouver = false;
-        // Gérer les erreurs ici
         console.error('Erreur de la requête :', error);
       }
     );
-    this.listeInscription.push(inscriptionHttp);
+    this.listeInscription.push(inscriptionHttpUser);
   });
   this.listeInscription.push(inscription);
 }
