@@ -14,14 +14,14 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ email }}</td>
-          <td>{{ nom }}</td>
-          <td>{{ prenom }}</td>
-          <td>{{ telephone }}</td>
-          <td>{{ equipe }}</td>
+          <td>{{ utilisateur.email }}</td>
+          <td>{{ utilisateur.nom }}</td>
+          <td>{{ utilisateur.prenom }}</td>
+          <td>{{ utilisateur.telephone }}</td>
+          <td>{{ utilisateur.equipe }}</td>
           <td>
             <ul>
-              <li *ngFor="let element of nomProjets">{{ element }}</li>
+              <li *ngFor="let element of utilisateur.nomProjets">{{ element }}</li>
             </ul>
           </td>
         </tr>

@@ -3,6 +3,7 @@ import {AuthService} from '../../service/auth.service';
 import { API_URLS, API_SOUS_URLS } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin , Subscription } from 'rxjs';
+import {Utilisateur} from '../../modele/Utilisateur';
 
 
 @Component({
@@ -16,47 +17,38 @@ export class UserDetailComponent {
 
   userTrouver : boolean = true;
 
-  telephone : string = '';
-
-  prenom : string = '';
-
-  nom : string = '';
-
-  email : string = '';
-
-  equipe : string = '';
-
-  nomProjets : Array<string> = new Array<string>();
+  utilisateur : Utilisateur = new Utilisateur();
 
 constructor(private authService : AuthService, private route: ActivatedRoute){
   
   let inscription = this.route.params.subscribe((params : any) => {
     let idCourant = params['id'];
     
-    let inscriptionHttpUser = forkJoin([
+    //forkJoin permet de travailler sur plusieurs observable (comme c'est le cas pour les requêtes HTTP) puis de récupérer le résultat dans un tableau
+    let inscriptionHttp = forkJoin([
       authService.doGet(`${API_URLS.USER_URL}/${idCourant}`),
       authService.doGet(`${API_URLS.USER_URL}/${idCourant}${API_SOUS_URLS.TEAM_SOUS_URL}`)
     ]).subscribe ((tableauDonnees : any) => {
         let donneeUtilisateur = tableauDonnees[0];
         let donneeEquipe = tableauDonnees[1];
 
-        this.telephone = donneeUtilisateur.telephone;
-        this.prenom = donneeUtilisateur.prenom;
-        this.nom = donneeUtilisateur.nom;
-        this.email = donneeUtilisateur.email;
+        this.utilisateur.telephone = donneeUtilisateur.telephone;
+        this.utilisateur.prenom = donneeUtilisateur.prenom;
+        this.utilisateur.nom = donneeUtilisateur.nom;
+        this.utilisateur.email = donneeUtilisateur.email;
 
         if (donneeUtilisateur.projets[0]) {
           donneeUtilisateur.projets.forEach((element : any)=> {
-            this.nomProjets.push(element.nomProjet);
+            this.utilisateur.nomProjets.push(element.nomProjet);
           });
         } else {
-          this.nomProjets.push('Aucun projet associé');
+          this.utilisateur.nomProjets.push('Aucun projet associé');
         }
 
         if (donneeEquipe){
-          this.equipe = donneeEquipe.description;
+          this.utilisateur.equipe = donneeEquipe.description;
         } else {
-          this.equipe = 'Aucune équipe associée';
+          this.utilisateur.equipe = 'Aucune équipe associée';
         }
 
         console.log('donneeUtilisateur :', donneeUtilisateur);
@@ -67,7 +59,7 @@ constructor(private authService : AuthService, private route: ActivatedRoute){
         console.error('Erreur de la requête :', error);
       }
     );
-    this.listeInscription.push(inscriptionHttpUser);
+    this.listeInscription.push(inscriptionHttp);
   });
   this.listeInscription.push(inscription);
 }
