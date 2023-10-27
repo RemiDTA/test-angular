@@ -1,1 +1,17 @@
-<p>user-list works!</p>
+<h1>Liste des utilisateurs</h1>
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Détail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let utilisateur of listeUtilisateur">
+        <td>{{ utilisateur.id }}</td>
+        <td>{{ utilisateur.email }}</td>
+        <td><a [routerLink]="'/user/' + utilisateur.id">Cliquez ici pour plus de détail</a></td>
+      </tr>
+    </tbody>
+</table>

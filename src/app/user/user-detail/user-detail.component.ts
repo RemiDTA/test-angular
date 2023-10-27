@@ -3,7 +3,7 @@ import {AuthService} from '../../service/auth.service';
 import { API_URLS, API_SOUS_URLS } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin , Subscription } from 'rxjs';
-import {Utilisateur} from '../../modele/Utilisateur';
+import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class UserDetailComponent {
 
   userTrouver : boolean = true;
 
-  utilisateur : Utilisateur = new Utilisateur();
+  utilisateur : UtilisateurComplet = new UtilisateurComplet();
 
 constructor(private authService : AuthService, private route: ActivatedRoute){
   
