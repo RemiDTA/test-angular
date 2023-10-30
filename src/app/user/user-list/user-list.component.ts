@@ -25,10 +25,10 @@ export class UserListComponent {
   constructor(authService : AuthService){
     let inscriptionHttp = authService.doGet(API_URLS.USER_URL).subscribe ((donneeUtilisateur : any) => {
       if (donneeUtilisateur[0]){
-        donneeUtilisateur.forEach((element : any) => {
+        donneeUtilisateur.forEach((utilisateurHttp : any) => {
           let utilisateurCourant = new UtilisateurSimple();
-          utilisateurCourant.email = element.email;
-          utilisateurCourant.id = element.id;
+          utilisateurCourant.email = utilisateurHttp.email;
+          utilisateurCourant.id = utilisateurHttp.id;
           this.listeUtilisateur.push(utilisateurCourant);
         });
       }
@@ -38,6 +38,15 @@ export class UserListComponent {
         console.error('Erreur de la requête :', error);
       }
     );
+  }
+
+  /**
+   * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
+   */
+  ngOnDestroy(){
+    this.listeInscription.forEach((inscription : Subscription)=> {
+      inscription.unsubscribe();
+    });
   }
 
 }

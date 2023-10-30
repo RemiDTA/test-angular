@@ -1,0 +1,21 @@
+<h1>Liste des Projets</h1>
+<div *ngFor="let projet of listeProjet">
+    <table>
+        <tbody>
+            <tr>
+                <td>ID :</td>
+                <td>{{ projet.id }}</td>
+            </tr>
+            <tr>
+                <td>Entreprise :</td>
+                <td>{{ projet.entreprise }}</td>
+            </tr>
+            <tr>
+                <td>Projet :</td>
+                <td>{{ projet.nomProjet }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<h2>Liste des collaborateurs</h2>
+<!-- Ici on intègre un autre composant, à savoir la liste des utilisateurs -->

@@ -10,6 +10,7 @@ export const URL_GLOBALE = {
     USER_SOUS_URL : `/user`,
     TEAM_SOUS_URL: `/team`,
     PROJET_SOUS_URL: `/projet`,
+    PROJET_COLLABORATEUR_SOUS_URL : `/collaborateurs`,
 }
 
   // Pour pouvoir créer une constante à partir d'une autre constante il faut que l'autre constante soit défini (il semble qu'il fonctionne par bloc plutôt que de haut en bas, c'est nul !)
