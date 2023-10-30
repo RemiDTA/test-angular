@@ -1,4 +1,4 @@
-# TestAngular
+# TestAngular (Angular v16.2.10)
 Ce projet front se lance en duo avec le back projet_test_springboot (https://github.com/RemiDTA/projet_test_springboot) et nécessite donc que projet_test_springboot soit lancé avant de lancer ce projet (cf le readme https://github.com/RemiDTA/projet_test_springboot#readme pour voir quels sont les prérequis du back office).
 
 Les prérequis du front sont les suivants (en plus de ceux du back) :
@@ -10,6 +10,7 @@ npm install ngx-cookie-service --save
 npm install rxjs
 
 Executer "ng serve" depuis la ligne de commande du terminal de Visual Code studio pour lancer le server front sur le port 42000.
+Il est possible que ng serve refuse de se lancer à cause de la sécurité windows, pour cela il faut lancer VSC en administrateur puis executer "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" et enfin executer "ng serve".
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
