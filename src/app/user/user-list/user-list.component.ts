@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
 import { API_URLS } from '../../constants';
 import {UtilisateurSimple} from '../../modele/UtilisateurSimple';
@@ -16,14 +16,29 @@ export class UserListComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  listeUtilisateur : Array<UtilisateurSimple> = new Array<UtilisateurSimple>();
+  /**
+   * Le @Input() permet de récupérer des information depuis un composant parent
+   * Cette variable permet de determiner si ce composant est appeler par un parent qui va remplir la variable listeUtilisateur
+   * NB : On pourrait vérifier si listeUtilisateur est vide alors on charge tout, mais dans le cas où le composant parent n'a pas d'utilisateur à charger, 
+   * on aurait une liste vide et on ne doit du coup pas charger la liste des utilisateurs
+   */
+  @Input() doitRecupererTousUtilisateurs : boolean = true;
+
+  @Input() listeUtilisateur : Array<UtilisateurSimple> = new Array<UtilisateurSimple>();
+
+  authService : any = null;
 
   affichageComplet(doitToutAfficher : boolean){
     this.doitToutAfficher = doitToutAfficher;
   }
 
   constructor(authService : AuthService){
-    let inscriptionHttp = authService.doGet(API_URLS.USER_URL).subscribe ((donneeUtilisateur : any) => {
+    this.authService = authService;
+  }
+
+  ngOnInit() {
+    if (this.doitRecupererTousUtilisateurs) {
+    let inscriptionHttp = this.authService.doGet(API_URLS.USER_URL).subscribe ((donneeUtilisateur : any) => {
       if (donneeUtilisateur[0]){
         donneeUtilisateur.forEach((utilisateurHttp : any) => {
           let utilisateurCourant = new UtilisateurSimple();
@@ -38,6 +53,8 @@ export class UserListComponent {
         console.error('Erreur de la requête :', error);
       }
     );
+  }
+    console.log("init : ", this.listeUtilisateur, this.doitRecupererTousUtilisateurs)
   }
 
   /**

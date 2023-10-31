@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { API_SOUS_URLS, API_URLS } from 'src/app/constants';
 import { Projet } from 'src/app/modele/Projet';
@@ -16,7 +16,7 @@ export class ProjetListComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  constructor(authService : AuthService){
+  constructor(authService : AuthService) {
 
     let inscriptionHttpProjet = authService.doGet(API_URLS.PROJET_URL).subscribe ((donneeProjet : any) => {
       if (donneeProjet[0]){

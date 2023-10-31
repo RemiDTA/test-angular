@@ -16,6 +16,7 @@
             </tr>
         </tbody>
     </table>
+    <!-- Ici on intègre un autre composant, à savoir la liste des utilisateurs -->
+    <h2>Liste des collaborateurs</h2>
+    <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="projet.listeCollaborateurs"></app-user-list>
 </div>
-<h2>Liste des collaborateurs</h2>
-<!-- Ici on intègre un autre composant, à savoir la liste des utilisateurs -->
