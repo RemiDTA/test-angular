@@ -1,0 +1,32 @@
+<h1>Liste des Equipes</h1>
+<div *ngFor="let equipe of listeEquipe">
+    <hr />
+    <table>
+        <tbody>
+            <tr>
+                <td>ID :</td>
+                <td>{{ equipe.id }}</td>
+            </tr>
+            <tr>
+                <td>Description :</td>
+                <td>{{ equipe.description }}</td>
+            </tr>
+            <tr>
+                <td>Emplacement :</td>
+                <td>{{ equipe.emplacement }}</td>
+            </tr>
+            <tr>
+                <td>Date de création :</td>
+                <td>{{ equipe.dateCreation }}</td>
+            </tr>
+            <tr>
+                <td>Chef Equipe :</td>
+                 <!-- Ici on intègre un autre composant, à savoir le user-detail concernant le chef d'équipe -->
+                <td>TODO</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Membres de l'équipe :</h2>
+    <!-- On intègre le composant existant qui liste les utilisateurs en lui donnant une source de données qui est la liste des membres de l'équipe-->
+    <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="equipe.listeUtilisateur"></app-user-list>
+</div>
