@@ -8,6 +8,7 @@ Télécharger l'IDE VisualCodeStrudio
 Télécharger les bibliothèques nécessaire, pour ce faire executer depuis le terminal VSC les commandes suivantes :
 npm install ngx-cookie-service --save
 npm install rxjs
+npx -p devextreme-cli devextreme add devextreme-angular
 
 Executer "ng serve" depuis la ligne de commande du terminal de Visual Code studio pour lancer le server front sur le port 42000.
 Il est possible que ng serve refuse de se lancer à cause de la sécurité windows, pour cela il faut lancer VSC en administrateur puis executer "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned" et enfin executer "ng serve".

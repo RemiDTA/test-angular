@@ -11,6 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProjetListComponent } from './projet/projet-list/projet-list.component';
 import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component';
+import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-equipe.component';
+// Librairie de lookup
+import { DxLookupModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,15 @@ import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component'
     UserDetailComponent,
     HomeComponent,
     ProjetListComponent,
-    EquipeListComponent
+    EquipeListComponent,
+    SelectEquipeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Permet de gérer ngModel
     HttpClientModule, // Permet de gérer les requêtes HTTP
+    DxLookupModule // Gestion de lookup
   ],
   providers: [],
   bootstrap: [AppComponent]

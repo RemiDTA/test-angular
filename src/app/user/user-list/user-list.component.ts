@@ -54,7 +54,6 @@ export class UserListComponent {
       }
     );
   }
-    console.log("init : ", this.listeUtilisateur, this.doitRecupererTousUtilisateurs)
   }
 
   /**

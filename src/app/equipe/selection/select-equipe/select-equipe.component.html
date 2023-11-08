@@ -1,0 +1,8 @@
+<dx-lookup
+    [dataSource]="listeEquipe"
+    valueExpr="id"
+    displayExpr="description"
+    searchMode="contains"
+    (onValueChanged)="selectionEquipe($event)"
+    cancelButtonText="Annuler">
+</dx-lookup>

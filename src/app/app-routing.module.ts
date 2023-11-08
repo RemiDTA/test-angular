@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProjetListComponent } from './projet/projet-list/projet-list.component';
 import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component';
+import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-equipe.component';
 
 //Permet de gérer les routes
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'projet', component: ProjetListComponent },
   { path: 'team', component: EquipeListComponent },
+  { path: 'team-select', component: SelectEquipeComponent },
   //La redirection doit être la dernière ligne
   { path: '**', redirectTo: '', pathMatch: 'full' } // Rediriger vers la page de garde par défaut
 ];
