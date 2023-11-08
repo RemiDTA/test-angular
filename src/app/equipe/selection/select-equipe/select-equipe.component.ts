@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { API_URLS } from 'src/app/constants';
 import { AuthService } from 'src/app/service/auth.service';
 import DataSource from 'devextreme/data/data_source';
@@ -18,7 +18,7 @@ export class SelectEquipeComponent {
 
   listeEquipe: DataSource;
 
-  @Output() idEquipeSelectionner:number =0;
+  @Output() eventIdEquipeSelectionner:EventEmitter<number> = new EventEmitter<number>();
 
   constructor(authService : AuthService){
     this.listeEquipe = new DataSource({});
@@ -35,6 +35,6 @@ export class SelectEquipeComponent {
   }
 
   selectionEquipe(evenement : any){
-    this.idEquipeSelectionner = evenement.value;
+    this.eventIdEquipeSelectionner.emit(evenement.value);
   }
 }

@@ -19,4 +19,9 @@
     <!-- Ici on intègre un autre composant, à savoir la liste des utilisateurs -->
     <h2>Liste des collaborateurs</h2>
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="projet.listeCollaborateurs"></app-user-list>
+    <h2>Associer une équipe à ce projet</h2>
+    <app-select-equipe (eventIdEquipeSelectionner) = "associerEquipeProjet($event, projet.id)"></app-select-equipe>
 </div>
+<button (click)="associerEquipeTousProjet()">Associer les équipes aux projets</button>
+<div name ="messageOk" *ngIf="traitementOk">Les équipes ont été correctement associées, si les données ne sont pas à jour, merci de rafraichir la page</div>
+<div name ="messageKO" *ngIf="traitementOk == false">Une erreur inconnue s'est produite</div>

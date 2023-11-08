@@ -47,8 +47,19 @@ export class AuthService {
    * @param url 
    */
   doGet(url : string) {
-    console.log(url);
     let resultat = this.http.get(url);
+    return resultat;
+  }
+
+  /**
+   * Méthode générique permettant de réalisé un POST sur une URL en passée en paramètre avec le body passé en paramètre
+   * @param url 
+   * @param body
+   */
+  doPost(url : string, body : any) {
+    console.log(url, body);
+    let resultat = this.http.post(url, body);
+    console.log(resultat);
     return resultat;
   }
 
