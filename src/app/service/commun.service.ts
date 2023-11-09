@@ -9,6 +9,11 @@ import { Subscription } from 'rxjs';
  */
 export class CommunService {
 
+  /**
+   * Délai de timeout des messages (à voir si à terme ne pas déplacer dans un fichier de conf)
+   */
+  static timeOutMessage : number = 5000;
+
   constructor() { }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {   Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { API_SOUS_URLS, API_URLS } from 'src/app/constants';
 import { Projet } from 'src/app/modele/Projet';
@@ -17,8 +17,6 @@ export class ProjetListComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  authService : any;
-
   /**
    * On a 3 cas : pas de traitement (null), traitement OK (true) et traitement KO (false)
    */
@@ -32,7 +30,7 @@ export class ProjetListComponent {
    */
   mapProjetEquipe : Map<number, number> = new Map<number, number>();
 
-  constructor(authService : AuthService) {
+  constructor(private authService : AuthService) {
     this.authService = authService;
   }
 
@@ -45,10 +43,8 @@ export class ProjetListComponent {
           projetCourant.entreprise = projet.entreprise;
           projetCourant.nomProjet = projet.nomProjet
           this.listeProjet.push(projetCourant);
-          console.log(donneeProjet);
           //Pour chaque projet, on récupère l'ensemble des collaborateurs (/projet/{id}/collaborateurs)
           let inscriptionHttpCollabo = this.authService.doGet(`${API_URLS.PROJET_URL}/${projet.id}${API_SOUS_URLS.PROJET_COLLABORATEUR_SOUS_URL}`).subscribe ((donneeUtilisateur : any) => {
-            console.log(donneeUtilisateur);
             if (donneeUtilisateur[0]){
                 donneeUtilisateur.forEach((utilisateurHttp : any) => {
                 let utilisateurCourant = new UtilisateurSimple();
@@ -77,7 +73,7 @@ export class ProjetListComponent {
      * Comme on affiche une liste de projet, on stock en cache ce que l'utilisateur a associer entre l'équipe et le projet jusqu'à ce que l'utilisateur valide et clic sur le bouton
      */
     associerEquipeProjet(event : any, idProjet : number){
-      this.mapProjetEquipe.set(idProjet, event)
+      this.mapProjetEquipe.set(idProjet, event);
     }
 
     /**
@@ -88,6 +84,11 @@ export class ProjetListComponent {
         this.authService.doPost(`${API_URLS.PROJET_URL}/${key}/${API_SOUS_URLS.PROJET_AJOUTER_COLLABORATEUR_EQUIPE_SOUS_URL}/${value}`, null).subscribe(
           (response :any) => {
             this.traitementOk = true;
+            // Permet d'appliquer un traitement (ici appliquer une valeur) au bout de Xms 
+            setTimeout(() => {
+              this.traitementOk = null;
+            }, CommunService.timeOutMessage);
+            
           },
           (error :any) => {
             console.error('Erreur lors de la requête :', error);
