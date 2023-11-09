@@ -4,6 +4,7 @@ import { API_SOUS_URLS, API_URLS } from 'src/app/constants';
 import { Projet } from 'src/app/modele/Projet';
 import { UtilisateurSimple } from 'src/app/modele/UtilisateurSimple';
 import { AuthService } from 'src/app/service/auth.service';
+import { CommunService } from 'src/app/service/commun.service';
 
 @Component({
   selector: 'app-projet-list',
@@ -68,9 +69,7 @@ export class ProjetListComponent {
    * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
    */
     ngOnDestroy(){
-      this.listeInscription.forEach((inscription : Subscription)=> {
-        inscription.unsubscribe();
-      });
+      CommunService.ngOnDestroy(this.listeInscription);
     }
 
     /**

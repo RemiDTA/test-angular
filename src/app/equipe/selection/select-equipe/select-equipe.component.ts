@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { API_URLS } from 'src/app/constants';
 import { AuthService } from 'src/app/service/auth.service';
 import DataSource from 'devextreme/data/data_source';
+import { CommunService } from 'src/app/service/commun.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -20,6 +22,8 @@ export class SelectEquipeComponent {
 
   @Output() eventIdEquipeSelectionner:EventEmitter<number> = new EventEmitter<number>();
 
+  private listeInscription : Array<Subscription> = new Array<Subscription>();
+
   constructor(authService : AuthService){
     this.listeEquipe = new DataSource({});
     let inscriptionHttp = authService.doGet(API_URLS.TEAM_URL).subscribe ((donneeEquipe : any) => {
@@ -32,9 +36,17 @@ export class SelectEquipeComponent {
         console.error('Erreur de la requête :', error);
       }
     );
+    this.listeInscription.push(inscriptionHttp);
   }
 
   selectionEquipe(evenement : any){
     this.eventIdEquipeSelectionner.emit(evenement.value);
+  }
+
+  /**
+   * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
+   */
+  ngOnDestroy(){
+    CommunService.ngOnDestroy(this.listeInscription);
   }
 }

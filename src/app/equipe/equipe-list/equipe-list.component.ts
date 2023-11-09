@@ -6,6 +6,7 @@ import { Equipe } from 'src/app/modele/Equipe';
 import { UtilisateurComplet } from 'src/app/modele/UtilisateurComplet';
 import { UtilisateurSimple } from 'src/app/modele/UtilisateurSimple';
 import { AuthService } from 'src/app/service/auth.service';
+import { CommunService } from 'src/app/service/commun.service';
 
 @Component({
   selector: 'app-equipe-list',
@@ -29,10 +30,8 @@ export class EquipeListComponent {
           equipeCourante.description = equipe.description
           equipeCourante.emplacement = equipe.emplacement
           this.listeEquipe.push(equipeCourante);
-          console.log(donneeEquipe);
           //Pour chaque equipe, on récupère l'ensemble des utilisateurs associés
           (equipe.users).forEach((utilisateur : any) => {
-            console.log(utilisateur);
             let utilisateurCourant = new UtilisateurSimple();
             utilisateurCourant.email = utilisateur.email;
             utilisateurCourant.id = utilisateur.id;
@@ -40,6 +39,8 @@ export class EquipeListComponent {
           });
         });
       }
+    }, (error : any) => {
+      console.error('Erreur : ', error);
     });
     this.listeInscription.push(inscriptionHttpProjet);
   }
@@ -47,11 +48,9 @@ export class EquipeListComponent {
   /**
    * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
    */
-    ngOnDestroy(){
-      this.listeInscription.forEach((inscription : Subscription)=> {
-        inscription.unsubscribe();
-      });
-    }
+  ngOnDestroy(){
+    CommunService.ngOnDestroy(this.listeInscription);
+  }
 
 }
 

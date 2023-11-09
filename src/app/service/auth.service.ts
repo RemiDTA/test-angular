@@ -29,16 +29,6 @@ export class AuthService {
 
     // Envoyez la demande POST vers l'URL de connexion
     let retour = this.http.post(API_URLS.LOGIN_URL, {}, httpOptions);
-    retour.subscribe(
-      (data : any) => {
-        // Gérer la réponse réussie ici
-        console.log('Réponse de la requête POST :', data);
-      },
-      (error : any) => {
-        // Gérer les erreurs ici
-        console.error('Erreur de la requête POST :', error);
-      }
-    );
     return retour;
   }
 
@@ -59,7 +49,6 @@ export class AuthService {
   doPost(url : string, body : any) {
     console.log(url, body);
     let resultat = this.http.post(url, body);
-    console.log(resultat);
     return resultat;
   }
 

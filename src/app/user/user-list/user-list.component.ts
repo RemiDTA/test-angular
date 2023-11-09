@@ -4,6 +4,7 @@ import { API_URLS } from '../../constants';
 import {UtilisateurSimple} from '../../modele/UtilisateurSimple';
 
 import { Subscription } from 'rxjs';
+import { CommunService } from 'src/app/service/commun.service';
 
 @Component({
   selector: 'app-user-list',
@@ -47,7 +48,6 @@ export class UserListComponent {
           this.listeUtilisateur.push(utilisateurCourant);
         });
       }
-      console.log(donneeUtilisateur);
     },
       (error : any) => {
         console.error('Erreur de la requête :', error);
@@ -60,9 +60,7 @@ export class UserListComponent {
    * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
    */
   ngOnDestroy(){
-    this.listeInscription.forEach((inscription : Subscription)=> {
-      inscription.unsubscribe();
-    });
+    CommunService.ngOnDestroy(this.listeInscription);
   }
 
 }

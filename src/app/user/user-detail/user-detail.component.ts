@@ -4,6 +4,7 @@ import { API_URLS, API_SOUS_URLS } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin , Subscription } from 'rxjs';
 import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
+import { CommunService } from 'src/app/service/commun.service';
 
 
 @Component({
@@ -50,9 +51,6 @@ constructor(private authService : AuthService, private route: ActivatedRoute){
         } else {
           this.utilisateur.equipe = 'Aucune équipe associée';
         }
-
-        console.log('donneeUtilisateur :', donneeUtilisateur);
-        console.log('donneeEquipe :', donneeEquipe);
       },
       (error : any) => {
         this.userTrouver = false;
@@ -64,13 +62,11 @@ constructor(private authService : AuthService, private route: ActivatedRoute){
   this.listeInscription.push(inscription);
 }
 
-/**
- * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
- */
-ngOnDestroy(){
-  this.listeInscription.forEach((inscription : Subscription)=> {
-    inscription.unsubscribe();
-  });
-}
+  /**
+   * Lors de la destruction du composant on vide les ressources que l'on a alloué à ce composant et on se désinscrit des evenements
+   */
+  ngOnDestroy(){
+    CommunService.ngOnDestroy(this.listeInscription);
+  }
 
 }
