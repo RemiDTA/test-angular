@@ -2,3 +2,12 @@
 dx-lookup {
     width: 200px;
 }
+
+th
+{
+    line-height: 50px;
+}
+
+td {
+    line-height: 30px;
+}

@@ -14,6 +14,7 @@ import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component'
 import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-equipe.component';
 // Librairie de lookup
 import { DxLookupModule } from 'devextreme-angular';
+import { SelectProjetComponent } from './projet/selection/select-projet/select-projet.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DxLookupModule } from 'devextreme-angular';
     HomeComponent,
     ProjetListComponent,
     EquipeListComponent,
-    SelectEquipeComponent
+    SelectEquipeComponent,
+    SelectProjetComponent
   ],
   imports: [
     BrowserModule,

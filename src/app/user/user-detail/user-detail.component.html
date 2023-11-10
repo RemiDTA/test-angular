@@ -1,7 +1,7 @@
 <h1>Détail de l'utilisateur</h1>
 <div class="alert alert-danger" role="alert" *ngIf= "!userTrouver">L'utilisateur n'a pas été trouvé</div>
 <div *ngIf= "userTrouver">
-  <table>
+  <table class = "table table-striped">
       <thead>
         <tr>
           <th>Email</th>
@@ -21,15 +21,19 @@
           <td>{{ utilisateur.prenom }}</td>
           <td>{{ utilisateur.telephone }}</td>
           <td>{{ utilisateur.equipe }}</td>
-          <td><app-select-equipe (eventIdEquipeSelectionner) = "selectionnerEquipe($event)"></app-select-equipe><button class="btn btn-primary btn-sm" [disabled] ="!idEquipeSelectionner" (click)="associerEquipe()">Associer les équipes à l'utilisateur</button></td>
-          <td></td>
           <td>
             <ul>
               <li *ngFor="let element of utilisateur.nomProjets">{{ element }}</li>
             </ul>
           </td>
+          <td><app-select-equipe (eventIdEquipeSelectionner) = "selectionnerEquipe($event)"></app-select-equipe><button class="btn btn-primary btn-sm" [disabled] ="!idEquipeSelectionner" (click)="associerEquipe()">Associer l'équipe à l'utilisateur</button></td>
+          <td><app-select-projet (eventIdProjetSelectionner) = "selectionnerProjet($event)"></app-select-projet><button class="btn btn-primary btn-sm" [disabled] ="!idProjetSelectionner" (click)="associerProjet()">Associer le projet à l'utilisateur</button></td>
         </tr>
       </tbody>
   </table>
+  <div class="alert alert-success" role="alert" *ngIf="traitementEquipeOk">L'équipe a été correctement associé, si les données ne sont pas à jour, merci de rafraichir la page</div>
+  <div class="alert alert-success" role="alert" *ngIf="traitemenProjetOk">Le projet a été correctement associé, si les données ne sont pas à jour, merci de rafraichir la page</div>
+  <div class="alert alert-danger" role="alert" *ngIf="traitementEquipeOk == false">Une erreur inconnue s'est produite</div>
+  <div class="alert alert-danger" role="alert" *ngIf="traitemenProjetOk == false">Une erreur inconnue s'est produite, cela peut se produire si l'utilisateur appartient déjà au projet associé</div>
 </div>
   

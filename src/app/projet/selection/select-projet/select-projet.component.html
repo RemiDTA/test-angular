@@ -1,0 +1,8 @@
+<dx-lookup
+    [dataSource]="listeProjet"
+    valueExpr="id"
+    displayExpr="nomProjet"
+    searchMode="contains"
+    (onValueChanged)="selectionProjet($event)"
+    cancelButtonText="Annuler">
+</dx-lookup>

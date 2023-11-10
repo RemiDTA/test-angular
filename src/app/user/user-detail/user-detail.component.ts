@@ -6,6 +6,7 @@ import { forkJoin , Subscription } from 'rxjs';
 import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
 import { CommunService } from 'src/app/service/commun.service';
 import { Equipe } from 'src/app/modele/Equipe';
+import { UtilisateurSimple } from 'src/app/modele/UtilisateurSimple';
 
 
 @Component({
@@ -35,9 +36,17 @@ export class UserDetailComponent {
     /**
    * Permet de gérer l'affichage des messages d'erreur concernant l'affectation du projet
    */
-  traitemenProjettOk : boolean | null = null;
+  traitemenProjetOk : boolean | null = null;
 
+  /**
+   * ID de l'équipe selectionner dans le lookup
+   */
   idEquipeSelectionner : number | null = null;
+
+  /**
+   * ID du projet selectionner dans le lookup
+   */
+  idProjetSelectionner : number | null = null;
 
 constructor(private authService : AuthService, private route: ActivatedRoute){}
 
@@ -108,6 +117,35 @@ associerEquipe(){
       (error :any) => {
         console.error('Erreur lors de la requête :', error);
         this.traitementEquipeOk = false;
+      }
+    );
+  }
+}
+
+/**
+ * Met en cache le numéro du projet selectionner par l'utilisateur
+ * Celui-ci devra valider en cliquant sur le bouton
+ */
+selectionnerProjet(event : any){
+  this.idProjetSelectionner = event;
+}
+
+associerProjet(){
+  if (this.idProjetSelectionner){
+  let body = new Array<UtilisateurComplet>();
+  body.push(this.utilisateur);
+    this.authService.doPost(`${API_URLS.PROJET_URL}/${this.idProjetSelectionner}/${API_SOUS_URLS.PROJET_AJOUTER_COLLABORATEUR_SOUS_URL}`, body).subscribe(
+      (response :any) => {
+        this.traitemenProjetOk = true;
+        // Permet d'appliquer un traitement (ici appliquer une valeur) au bout de Xms 
+        setTimeout(() => {
+          this.traitemenProjetOk = null;
+        }, CommunService.timeOutMessage);
+        
+      },
+      (error :any) => {
+        console.error('Erreur lors de la requête :', error);
+        this.traitemenProjetOk = false;
       }
     );
   }
