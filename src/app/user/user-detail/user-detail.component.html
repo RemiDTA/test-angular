@@ -1,5 +1,5 @@
 <h1>Détail de l'utilisateur</h1>
-<div class = "erreur" *ngIf= "!userTrouver">L'utilisateur n'a pas été trouvé</div>
+<div class="alert alert-danger" role="alert" *ngIf= "!userTrouver">L'utilisateur n'a pas été trouvé</div>
 <div *ngIf= "userTrouver">
   <table>
       <thead>
@@ -10,6 +10,8 @@
           <th>Téléphone</th>
           <th>Équipe</th>
           <th>Projet</th>
+          <th>Associer à une equipe</th>
+          <th>Associer à un projet</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +21,8 @@
           <td>{{ utilisateur.prenom }}</td>
           <td>{{ utilisateur.telephone }}</td>
           <td>{{ utilisateur.equipe }}</td>
+          <td><app-select-equipe (eventIdEquipeSelectionner) = "selectionnerEquipe($event)"></app-select-equipe><button class="btn btn-primary btn-sm" [disabled] ="!idEquipeSelectionner" (click)="associerEquipe()">Associer les équipes à l'utilisateur</button></td>
+          <td></td>
           <td>
             <ul>
               <li *ngFor="let element of utilisateur.nomProjets">{{ element }}</li>

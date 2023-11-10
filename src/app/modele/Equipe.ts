@@ -2,10 +2,10 @@ import { UtilisateurComplet } from './UtilisateurComplet';
 import { UtilisateurSimple } from './UtilisateurSimple';
 
 export class Equipe {
-    id: number = 0;
+    id: number | null = null;
     description: string= '';
     emplacement: string= '';
     listeUtilisateur: Array<UtilisateurSimple> = new Array<UtilisateurSimple>();
-    dateCreation: Date = new Date();
-    chefEquipe: UtilisateurComplet = new UtilisateurComplet();
+    dateCreation: Date | null = null;
+    chefEquipe: UtilisateurComplet | null = null;
 }

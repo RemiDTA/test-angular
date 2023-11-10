@@ -44,11 +44,22 @@ export class AuthService {
   /**
    * Méthode générique permettant de réalisé un POST sur une URL en passée en paramètre avec le body passé en paramètre
    * @param url 
+   * @param monbody
+   */
+  doPost(url : string, monbody : any) {
+    console.log(url, monbody);
+    let resultat = this.http.post(url, monbody);
+    return resultat;
+  }
+
+  /**
+   * Méthode générique permettant de réalisé un PATCH sur une URL en passée en paramètre avec le body passé en paramètre
+   * @param url 
    * @param body
    */
-  doPost(url : string, body : any) {
+  doPatch(url : string, body : any) {
     console.log(url, body);
-    let resultat = this.http.post(url, body);
+    let resultat = this.http.patch(url, body);
     return resultat;
   }
 
