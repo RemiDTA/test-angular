@@ -18,9 +18,9 @@ export const URL_GLOBALE = {
 
   // Pour pouvoir créer une constante à partir d'une autre constante il faut que l'autre constante soit défini (il semble qu'il fonctionne par bloc plutôt que de haut en bas, c'est nul !)
 export const API_URLS = {
-    LOGIN_URL : `${URL_GLOBALE.URL_COMPLETE_BO}${API_SOUS_URLS.LOGIN_SOUS_URL}`,
-    USER_URL : `${URL_GLOBALE.URL_COMPLETE_BO}${API_SOUS_URLS.USER_SOUS_URL}`,
-    TEAM_URL: `${URL_GLOBALE.URL_COMPLETE_BO}${API_SOUS_URLS.TEAM_SOUS_URL}`,
-    PROJET_URL: `${URL_GLOBALE.URL_COMPLETE_BO}${API_SOUS_URLS.PROJET_SOUS_URL}`,
+    LOGIN_URL : `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.LOGIN_SOUS_URL}`,
+    USER_URL : `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.USER_SOUS_URL}`,
+    TEAM_URL: `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.TEAM_SOUS_URL}`,
+    PROJET_URL: `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.PROJET_SOUS_URL}`,
 }
 

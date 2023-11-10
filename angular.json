@@ -65,10 +65,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "test-angular:build:production"
+              "browserTarget": "test-angular:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "test-angular:build:development"
+              "browserTarget": "test-angular:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
