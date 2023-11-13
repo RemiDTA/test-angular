@@ -39,6 +39,11 @@ export class UserDetailComponent {
   traitemenProjetOk : boolean | null = null;
 
   /**
+   * Permet de gérer l'affichage des messages d'erreurs lors de la mise à jours de l'utilisateur
+   */
+  majUtilisateur : boolean | null = null;
+
+  /**
    * ID de l'équipe selectionner dans le lookup
    */
   idEquipeSelectionner : number | null = null;
@@ -101,11 +106,11 @@ selectionnerEquipe(event : any){
 }
 
 associerEquipe(){
-  let bodyEquipe = new Equipe();
   if (this.idEquipeSelectionner) {
+  let bodyEquipe = new Equipe();
     bodyEquipe.id = this.idEquipeSelectionner;
     
-    this.authService.doPatch(`${API_URLS.USER_URL}/${this.utilisateur.id}/${API_SOUS_URLS.USER_ASSOCIER_EQUIPE_SOUS_URL}`, bodyEquipe).subscribe(
+    let inscription = this.authService.doPatch(`${API_URLS.USER_URL}/${this.utilisateur.id}/${API_SOUS_URLS.USER_ASSOCIER_EQUIPE_SOUS_URL}`, bodyEquipe).subscribe(
       (response :any) => {
         this.traitementEquipeOk = true;
         // Permet d'appliquer un traitement (ici appliquer une valeur) au bout de Xms 
@@ -119,6 +124,7 @@ associerEquipe(){
         this.traitementEquipeOk = false;
       }
     );
+    this.listeInscription.push(inscription);
   }
 }
 
@@ -132,11 +138,14 @@ selectionnerProjet(event : any){
 
 associerProjet(){
   if (this.idProjetSelectionner){
-  let body = new Array<UtilisateurComplet>();
-  body.push(this.utilisateur);
-    this.authService.doPost(`${API_URLS.PROJET_URL}/${this.idProjetSelectionner}/${API_SOUS_URLS.PROJET_AJOUTER_COLLABORATEUR_SOUS_URL}`, body).subscribe(
-      (response :any) => {
+    let body = new Array<UtilisateurComplet>();
+    body.push(this.utilisateur);
+    let inscription = this.authService.doPost(`${API_URLS.PROJET_URL}/${this.idProjetSelectionner}/${API_SOUS_URLS.PROJET_AJOUTER_COLLABORATEUR_SOUS_URL}`, body).subscribe(
+      (projet :any) => {
         this.traitemenProjetOk = true;
+        console.log(projet.nomProjet, projet);
+        //Remise en cache du projet retourné par le BO
+        this.utilisateur.nomProjets.push(projet.nomProjet);
         // Permet d'appliquer un traitement (ici appliquer une valeur) au bout de Xms 
         setTimeout(() => {
           this.traitemenProjetOk = null;
@@ -148,6 +157,7 @@ associerProjet(){
         this.traitemenProjetOk = false;
       }
     );
+    this.listeInscription.push(inscription);
   }
 }
 
@@ -157,5 +167,33 @@ associerProjet(){
   ngOnDestroy(){
     CommunService.ngOnDestroy(this.listeInscription);
   }
+
+  /**
+   * Mettre à jour les informations personnelles d'un utilisateur.
+   */
+  majUser(){
+    //D'abord on met à jour les informations utilisateurs
+      let inscription = this.authService.doPatch(`${API_URLS.USER_URL}/${this.utilisateur.id}`, this.utilisateur).subscribe(
+        (response :any) => {
+          // L'association de l'équipe se base sur les informations utilisateurs, on a donc besoin que la màj du user soit effectué avant de demandé la màj de l'équipe
+          this.associerEquipe();
+          this.majUtilisateur = true;
+          // Permet d'appliquer un traitement au bout de Xms 
+          setTimeout(() => {
+            // Refresh de page et donc re-récupération des informations
+            // Fais ici juste pour savoir comment faire la bonne pratique serait de récupérer les infos et de remettre à jour les données côté front (si possible sans appel GET puisque les POST retourne les objets cf associerProjet())
+            // Cependant, dans ce cas-ci on serait obliger de rappeler le GET pour l'équipe, le POST ne retourne pas l'objet equipe
+            location.reload();
+          }, CommunService.timeOutMessage);
+        },
+        (error :any) => {
+          console.error('Erreur lors de la requête :', error);
+          this.majUtilisateur = false;
+        }
+      );
+      this.listeInscription.push(inscription);
+      // L'association à un projet n'est pas dépendante de la màj du user
+      this.associerProjet();
+    }
 
 }
