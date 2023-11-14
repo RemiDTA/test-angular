@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Injectable({
@@ -24,4 +25,16 @@ export class CommunService {
        inscription.unsubscribe();
      });
    }
+
+   /**
+    * Reedirige vers l'url passé en paramètre au bout de #CommunService.timeOutMessage ms
+    * 
+    * @param router 
+    * @param url 
+    */
+  static rediriger(router : Router, url : string){
+    setTimeout(() => {
+    router.navigate([url]);
+    }, CommunService.timeOutMessage);
+  }
 }

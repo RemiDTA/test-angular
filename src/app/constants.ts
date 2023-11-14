@@ -24,3 +24,11 @@ export const API_URLS = {
     PROJET_URL: `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.PROJET_SOUS_URL}`,
 }
 
+export const URL_FRONT = {
+  HOME :  '',
+  USER : 'user',
+  LOGIN : 'login',
+  PROJET : 'projet',
+  TEAM : 'team'
+}
+

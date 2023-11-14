@@ -9,15 +9,16 @@ import { HomeComponent } from './home/home.component';
 import { ProjetListComponent } from './projet/projet-list/projet-list.component';
 import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component';
 import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-equipe.component';
+import { URL_FRONT } from './constants';
 
 //Permet de gérer les routes
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'user', component: UserListComponent },
-  { path: 'user/:id', component: UserDetailComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'projet', component: ProjetListComponent },
-  { path: 'team', component: EquipeListComponent },
+  { path: URL_FRONT.HOME, component: HomeComponent },
+  { path: URL_FRONT.USER, component: UserListComponent },
+  { path: `${URL_FRONT.USER}/:id`, component: UserDetailComponent },
+  { path: URL_FRONT.LOGIN, component: LoginComponent },
+  { path: URL_FRONT.PROJET, component: ProjetListComponent },
+  { path: URL_FRONT.TEAM, component: EquipeListComponent },
   { path: 'team-select', component: SelectEquipeComponent },
   //La redirection doit être la dernière ligne
   { path: '**', redirectTo: '', pathMatch: 'full' } // Rediriger vers la page de garde par défaut

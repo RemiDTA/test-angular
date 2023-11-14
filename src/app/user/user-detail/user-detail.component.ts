@@ -6,7 +6,6 @@ import { forkJoin , Subscription } from 'rxjs';
 import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
 import { CommunService } from 'src/app/service/commun.service';
 import { Equipe } from 'src/app/modele/Equipe';
-import { UtilisateurSimple } from 'src/app/modele/UtilisateurSimple';
 
 
 @Component({

@@ -2,16 +2,28 @@
 <div class="login-container">
     <!--ngSubmit est l'evenement et connexion la méthode qui sera appelée par le composant (ici login.composant.ts)-->
     <h2>Connectez-vous</h2>
-    <form (ngSubmit)="connexion()">
-      <div class="form-group">
-        <label for="email">Nom d'utilisateur (Il s'agit de votre email)</label>
-        <input type="text" id="email" name="email" [(ngModel)]="email" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Mot de passe (CHANGE_MOI)</label>
-        <input type="password" id="password" name="password" [(ngModel)]="password" required>
-      </div>
-      <button type="submit">Se connecter</button>
+    <form (ngSubmit)="connexion()" class="form-control">
+      <table>
+        <tr>
+          <td>
+            <label for="email">Nom d'utilisateur (Il s'agit de votre email)</label>
+          </td>
+          <td> 
+            <input type="email" id="email" name="email" [(ngModel)]="email" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Mot de passe (CHANGE_MOI)</label>
+          </td>
+          <td>
+            <input type="password" id="password" name="password" [(ngModel)]="password" required>
+          </td>
+        </tr>
+      </table>
+      <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
+    <div class="alert alert-success" role="alert" *ngIf="connexionOk">Connexion réussie, vous allez être redirigé dans quelques secondes</div>
+    <div class="alert alert-danger" role="alert" *ngIf="connexionOk == false">Une erreur s'est produite, vérifiez que votre email / mot de passe soient correctement saisi</div>
 </div>
   

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { r3JitTypeSourceSpan } from '@angular/compiler';
 import { HttpHeaders } from '@angular/common/http';
 import { API_URLS } from '../constants';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,10 @@ export class AuthService {
   login(username: string, password: string) {
 
     //Headers nécessaire pour faire de la connexion basic auth
-    let httpOptions = this.creerHeaderBasicAuth(username, password);
+    let httpOptions = this.creerHeaderBasicAuth();
 
-    // Envoyez la demande POST vers l'URL de connexion
-    let retour = this.http.post(API_URLS.LOGIN_URL, {}, httpOptions);
+    // Envoyez la demande POST vers l'URL de connexion (l'encodage URI est un parametrage gérer automatiquement par Spring Security)
+    let retour = this.http.post(API_URLS.LOGIN_URL, encodeURI(`username=${username}&password=${password}`), httpOptions);
     return retour;
   }
 
@@ -44,11 +44,11 @@ export class AuthService {
   /**
    * Méthode générique permettant de réalisé un POST sur une URL en passée en paramètre avec le body passé en paramètre
    * @param url 
-   * @param monbody
+   * @param body
    */
-  doPost(url : string, monbody : any) {
-    console.log(url, monbody);
-    let resultat = this.http.post(url, monbody);
+  doPost(url : string, body : any) {
+    console.log(url, body);
+    let resultat = this.http.post(url, body);
     return resultat;
   }
 
@@ -66,17 +66,13 @@ export class AuthService {
 
 
   /**
-   * Génère le header pour le basic auth (encodage base 64 de username et password)
-   * N'est pas utilisé à cause de vérification de sécurité CORS (lorsque j'essaie de mettre les vérifications de rôles, la configuration CORS que j'ai mise en place côté server ne fonctionne pas)
+   * Génère le header pour le basic auth
    */
-  creerHeaderBasicAuth(username: string, password: string){
-    //Headers nécessaire pour faire de la connexion basic auth
+  creerHeaderBasicAuth(){
     return {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + btoa(username + ':' + password)
+        'Content-Type' : 'application/x-www-form-urlencoded'
       })
     };
   }
-
-
 }

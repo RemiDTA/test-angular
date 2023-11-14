@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AuthService} from '../service/auth.service';
 import { Subscription } from 'rxjs';
 import { CommunService } from '../service/commun.service';
+import { Router } from '@angular/router';
+import {  URL_FRONT } from '../constants';
 
 @Component({
   selector: 'app-login',
@@ -14,17 +16,25 @@ export class LoginComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  constructor(private authService: AuthService) {} // Injection du service AuthService
+  connexionOk : boolean | null = null;
+
+  constructor(private authService: AuthService, private router: Router) {} // Injection du service AuthService
 
   connexion() {
     // Appel de la méthode login du service
     let inscriptionHttp = this.authService.login(this.email, this.password)
        .subscribe((response : any) => {
-         // Traitez ici la réponse du service après la connexion réussie
-         console.log('Connexion réussie', response);
+        this.connexionOk = true;
+        CommunService.rediriger(this.router, URL_FRONT.HOME);
        }, (error : any) => {
-         // Traitez ici les erreurs en cas d'échec de la connexion
-         console.error('Erreur de connexion', error);
+         // Il s'agit d'un faux négatif ici, la réponse est 200 mais avec redirection de la part du BO
+         if (error.status == 200) {
+          this.connexionOk = true;
+          CommunService.rediriger(this.router, URL_FRONT.HOME);
+         } else {
+          this.connexionOk = false;
+          console.error('Erreur de connexion', error);
+         }
        });
        this.listeInscription.push(inscriptionHttp);
   }
