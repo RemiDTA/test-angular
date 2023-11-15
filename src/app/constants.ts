@@ -24,11 +24,19 @@ export const API_URLS = {
     PROJET_URL: `${URL_GLOBALE.URL_PROXY}${API_SOUS_URLS.PROJET_SOUS_URL}`,
 }
 
+// URL utilisé par le projet Angular
 export const URL_FRONT = {
   HOME :  '',
   USER : 'user',
+  USER_CREATE : 'createUser',
   LOGIN : 'login',
   PROJET : 'projet',
-  TEAM : 'team'
+  PROJET_CREATE : 'createProjet',
+  TEAM : 'team',
+  TEAM_CREATE : 'createTeam',
+}
+
+// Nom des variables utilisées dans le local
+export const LOCAL_STORAGE = {
 }
 

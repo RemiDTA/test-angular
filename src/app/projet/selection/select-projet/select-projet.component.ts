@@ -24,8 +24,11 @@ export class SelectProjetComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  constructor(authService : AuthService){
-    let inscriptionHttp = authService.doGet(API_URLS.PROJET_URL).subscribe ((donneeProjet : any) => {
+  constructor(private authService : AuthService){
+  }
+
+  ngOnInit(){
+    let inscriptionHttp = this.authService.doGet(API_URLS.PROJET_URL).subscribe ((donneeProjet : any) => {
       console.log(donneeProjet);
       this.listeProjet = new DataSource({
         store: donneeProjet,

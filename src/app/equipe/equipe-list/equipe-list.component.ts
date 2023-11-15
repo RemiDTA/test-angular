@@ -19,9 +19,11 @@ export class EquipeListComponent {
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
-  constructor(authService : AuthService) {
+  constructor(private authService : AuthService) {
+  }
 
-    let inscriptionHttpProjet = authService.doGet(API_URLS.TEAM_URL).subscribe ((donneeEquipe : any) => {
+  ngOnInit(){
+    let inscriptionHttpProjet = this.authService.doGet(API_URLS.TEAM_URL).subscribe ((donneeEquipe : any) => {
       if (donneeEquipe[0]){
         donneeEquipe.forEach((equipe : any) => {
           let equipeCourante = new Equipe();

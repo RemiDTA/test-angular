@@ -24,19 +24,27 @@ export class LoginComponent {
     // Appel de la méthode login du service
     let inscriptionHttp = this.authService.login(this.email, this.password)
        .subscribe((response : any) => {
-        this.connexionOk = true;
-        CommunService.rediriger(this.router, URL_FRONT.HOME);
+        this.traitementLorsConnexion();
        }, (error : any) => {
          // Il s'agit d'un faux négatif ici, la réponse est 200 mais avec redirection de la part du BO
          if (error.status == 200) {
-          this.connexionOk = true;
-          CommunService.rediriger(this.router, URL_FRONT.HOME);
+          this.traitementLorsConnexion();
          } else {
           this.connexionOk = false;
           console.error('Erreur de connexion', error);
          }
        });
        this.listeInscription.push(inscriptionHttp);
+  }
+
+  /**
+   * Traitements réalisés lors d'une connexion réussie
+   */
+  traitementLorsConnexion(){
+    this.connexionOk = true;
+    CommunService.rediriger(this.router, URL_FRONT.HOME);
+    //Gestion de l'event
+    this.authService.setLoginUtilisateurConnecter(this.email);
   }
 
     /**

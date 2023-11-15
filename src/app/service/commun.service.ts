@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LOCAL_STORAGE } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,21 @@ export class CommunService {
     setTimeout(() => {
     router.navigate([url]);
     }, CommunService.timeOutMessage);
+  }
+
+  /**
+   * Récupère une variable depuis le localStorage
+   * @param nomVariable 
+   */
+  static recupererLocalStorage(nomVariable : string) {
+    return localStorage.getItem(nomVariable);
+  }
+
+  /**
+   * Vérifie si la variable existe dans le localStorage
+   * @param nomVariable 
+   */
+  static existeDansLocalStorage(nomVariable : string) {
+    return this.recupererLocalStorage(nomVariable) != null;
   }
 }

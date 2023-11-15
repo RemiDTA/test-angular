@@ -2,17 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { API_URLS } from '../constants';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+/**
+ * Evenement permettant de renseigner le login de l'utilisateur connecté
+ * Normalement je devrais utilisé des cookie et récupérer le JSESSIONID sauf que ce petit projet est sur une URL HTTP et non HTTPS et que ce cookie n'est pas accessible (sécurité toussa toussa)
+ */
+  private loginUtilisateurConnecterSubject = new BehaviorSubject<string>("");
+
+  loginUtilisateurConnecter$: Observable<string> = this.loginUtilisateurConnecterSubject.asObservable();
   
 /**
  * Constructeur contenant les injections nécessaire à son utilisation :
  * HttpClient => gestion des requêtes
- * CookieService => gestion des cookie
  */
   constructor(private http: HttpClient) {}
 
@@ -30,6 +38,14 @@ export class AuthService {
     // Envoyez la demande POST vers l'URL de connexion (l'encodage URI est un parametrage gérer automatiquement par Spring Security)
     let retour = this.http.post(API_URLS.LOGIN_URL, encodeURI(`username=${username}&password=${password}`), httpOptions);
     return retour;
+  }
+
+  /**
+   * Permet de notifier qu'il y a un utilisateur qui est connecté
+   * @param isAuthenticated 
+   */
+  setLoginUtilisateurConnecter(login: string) {
+    this.loginUtilisateurConnecterSubject.next(login);
   }
 
   /**
