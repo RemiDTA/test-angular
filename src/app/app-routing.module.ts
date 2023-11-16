@@ -10,7 +10,7 @@ import { ProjetListComponent } from './projet/projet-list/projet-list.component'
 import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component';
 import { URL_FRONT } from './constants';
 import { UserCreateComponent } from './user/user-create/user-create.component';
-import { TeamCreateComponent } from './team/team-create/team-create.component';
+import { TeamCreateComponent } from './equipe/equipe-create/team-create.component';
 import { ProjetCreateComponent } from './projet/projet-create/projet-create.component';
 
 //Permet de gérer les routes

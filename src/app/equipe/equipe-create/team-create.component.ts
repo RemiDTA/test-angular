@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import { API_URLS } from 'src/app/constants';
-import { Projet } from 'src/app/modele/Projet';
+import { Equipe } from 'src/app/modele/Equipe';
 import { AuthService } from 'src/app/service/auth.service';
 import { CommunService } from 'src/app/service/commun.service';
 import { Subscription } from 'rxjs';
+import { API_URLS } from 'src/app/constants';
 
 @Component({
-  selector: 'app-projet-create',
-  templateUrl: './projet-create.component.html',
-  styleUrls: ['./projet-create.component.css']
+  selector: 'app-team-create',
+  templateUrl: './team-create.component.html',
+  styleUrls: ['./team-create.component.css']
 })
-export class ProjetCreateComponent {
+export class TeamCreateComponent {
 
   /**
    * Gère l'affichage des messages d'erreurs/succès
    */
   traitementOk : boolean | null = null;
 
-  projet : Projet = new Projet();
+  equipe : Equipe = new Equipe();
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
@@ -25,11 +25,10 @@ export class ProjetCreateComponent {
 
   }
 
-  creerProjet(){
-    
-    let inscriptionHttpProjet = this.authService.doPost(API_URLS.PROJET_URL, this.projet).subscribe ((retour : any) => {
+  creerEquipe(){
+    let inscriptionHttpEquipe = this.authService.doPost(API_URLS.TEAM_URL, this.equipe).subscribe ((retour : any) => {
       //On vide le formulaire
-      this.projet = new Projet();
+      this.equipe = new Equipe();
       this.traitementOk = true;
       // Permet d'appliquer un traitement (ici appliquer une valeur) au bout de Xms 
       setTimeout(() => {
@@ -39,7 +38,7 @@ export class ProjetCreateComponent {
       this.traitementOk = false;
       console.error('Erreur : ', error);
     });
-    this.listeInscription.push(inscriptionHttpProjet);
+    this.listeInscription.push(inscriptionHttpEquipe);
   }
 
   
