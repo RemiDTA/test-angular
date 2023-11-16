@@ -28,12 +28,13 @@ export const API_URLS = {
 export const URL_FRONT = {
   HOME :  '',
   USER : 'user',
-  USER_CREATE : 'createUser',
+  USER_CREATE : 'userCreate',
   LOGIN : 'login',
   PROJET : 'projet',
-  PROJET_CREATE : 'createProjet',
+  PROJET_CREATE : 'projetCreate',
   TEAM : 'team',
-  TEAM_CREATE : 'createTeam',
+  TEAM_CREATE : 'teamCreate'
+  
 }
 
 // Nom des variables utilisées dans le local

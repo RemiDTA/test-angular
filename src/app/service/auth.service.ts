@@ -79,8 +79,6 @@ export class AuthService {
     return resultat;
   }
 
-
-
   /**
    * Génère le header pour le basic auth
    */

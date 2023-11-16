@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { API_URLS } from 'src/app/constants';
 import { Equipe } from 'src/app/modele/Equipe';
-import { UtilisateurComplet } from 'src/app/modele/UtilisateurComplet';
 import { UtilisateurSimple } from 'src/app/modele/UtilisateurSimple';
 import { AuthService } from 'src/app/service/auth.service';
 import { CommunService } from 'src/app/service/commun.service';

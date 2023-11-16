@@ -15,6 +15,9 @@ import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-e
 // Librairie de lookup
 import { DxLookupModule } from 'devextreme-angular';
 import { SelectProjetComponent } from './projet/selection/select-projet/select-projet.component';
+import { ProjetCreateComponent } from './projet/projet-create/projet-create.component';
+import { TeamCreateComponent } from './team/team-create/team-create.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { SelectProjetComponent } from './projet/selection/select-projet/select-p
     ProjetListComponent,
     EquipeListComponent,
     SelectEquipeComponent,
-    SelectProjetComponent
+    SelectProjetComponent,
+    ProjetCreateComponent,
+    TeamCreateComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
