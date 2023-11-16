@@ -1,1 +1,41 @@
-<p>user-create works!</p>
+<h1>Créer une nouvelle équipe</h1>
+  <form (ngSubmit)="creerUtilisateur()" class="form-control"> 
+      <table>
+        <tr>
+          <td>
+            <label for="email">Email</label>
+          </td>
+          <td> 
+            <input type="email" id="email" name="email" [(ngModel)]="utilisateur.email" required>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="nom">Nom</label>
+          </td>
+          <td>
+            <input type="text" id="nom" name="nom" [(ngModel)]="utilisateur.nom" required>
+          </td>
+        </tr>
+        <tr>
+            <td>
+              <label for="prenom">Prenom</label>
+            </td>
+            <td>
+              <input type="text" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" required>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="telephone">Telephone</label>
+            </td>
+            <td>
+              <input type="tel" id="telephone" name="telephone" [(ngModel)]="utilisateur.telephone" required>
+            </td>
+          </tr>
+      </table>
+    <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
+  </form>
+
+  <div class="alert alert-success" role="alert" *ngIf="traitementOk">L'utilisateur a été créer</div>
+  <div class="alert alert-danger" role="alert" *ngIf="traitementOk == false">Une erreur inconnue s'est produite</div>
