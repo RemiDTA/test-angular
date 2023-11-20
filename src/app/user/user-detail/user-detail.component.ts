@@ -204,7 +204,7 @@ associerProjet(){
      * Supprime l'utilisateur courant 
      */
     deleteUser(){
-      CommunService.deleteUser(this.utilisateur.id, this.authService).subscribe(
+      let inscription = CommunService.deleteUser(this.utilisateur.id, this.authService).subscribe(
         (response :any) => {
           this.traitementSuppressionOk = true;
         },
@@ -213,6 +213,7 @@ associerProjet(){
           this.traitementSuppressionOk = false;
         }
       );
+      this.listeInscription.push(inscription);
     }
 
 }
