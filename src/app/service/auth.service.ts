@@ -63,7 +63,7 @@ export class AuthService {
    * @param body
    */
   doPost(url : string, body : any) {
-    console.log(url, body);
+    console.log("POST :",url, body);
     let resultat = this.http.post(url, body);
     return resultat;
   }
@@ -74,10 +74,21 @@ export class AuthService {
    * @param body
    */
   doPatch(url : string, body : any) {
-    console.log(url, body);
+    console.log("PATCH :", url, body);
     let resultat = this.http.patch(url, body);
     return resultat;
   }
+
+  /**
+  * Méthode générique permettant de réalisé un PATCH sur une URL en passée en paramètre avec le body passé en paramètre
+  * @param url 
+  * @param body
+  */
+ doDelete(url : string) {
+   console.log("DELETE :", url);
+   let resultat = this.http.delete(url);
+   return resultat;
+ }
 
   /**
    * Génère le header pour le basic auth

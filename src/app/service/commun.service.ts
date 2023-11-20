@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LOCAL_STORAGE } from '../constants';
+import { AuthService } from './auth.service';
+import { API_URLS, URL_FRONT } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +29,13 @@ export class CommunService {
    }
 
    /**
-    * Reedirige vers l'url passé en paramètre au bout de #CommunService.timeOutMessage ms
+    * Reedirige vers l'url passé en paramètre
     * 
     * @param router 
     * @param url 
     */
   static rediriger(router : Router, url : string){
-    setTimeout(() => {
     router.navigate([url]);
-    }, CommunService.timeOutMessage);
   }
 
   /**
@@ -53,5 +52,14 @@ export class CommunService {
    */
   static existeDansLocalStorage(nomVariable : string) {
     return this.recupererLocalStorage(nomVariable) != null;
+  }
+
+  /**
+   * Permet d'effectuer la suppression de l'utilisateur dont l'id est passé en paramètre
+   * (Si on était sur un vrai projet j'aurais un gestionnaire pour les utilisateurs, je ne placerais pas un traitement métier/non générique dans un service commun)
+   * @param userId 
+   */
+  static deleteUser(userId : number,authService : AuthService){
+    return authService.doDelete(`${API_URLS.USER_URL}/${userId}`);
   }
 }

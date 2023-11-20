@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
-import { API_URLS, API_SOUS_URLS } from '../../constants';
+import { API_URLS, API_SOUS_URLS, URL_FRONT } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin , Subscription } from 'rxjs';
 import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
@@ -31,6 +31,11 @@ export class UserDetailComponent {
    * Permet de gérer l'affichage des messages d'erreur concernant l'affectation de l'équipe
    */
   traitementEquipeOk : boolean | null = null;
+
+  /**
+   * Permet de gérer l'affichage des messages d'erreur concernant la suppression d'un utilisateur
+   */
+  traitementSuppressionOk : boolean | null = null;
 
     /**
    * Permet de gérer l'affichage des messages d'erreur concernant l'affectation du projet
@@ -193,6 +198,21 @@ associerProjet(){
       this.listeInscription.push(inscription);
       // L'association à un projet n'est pas dépendante de la màj du user
       this.associerProjet();
+    }
+
+    /**
+     * Supprime l'utilisateur courant 
+     */
+    deleteUser(){
+      CommunService.deleteUser(this.utilisateur.id, this.authService).subscribe(
+        (response :any) => {
+          this.traitementSuppressionOk = true;
+        },
+        (error :any) => {
+          console.error('Erreur lors de la requête :', error);
+          this.traitementSuppressionOk = false;
+        }
+      );
     }
 
 }

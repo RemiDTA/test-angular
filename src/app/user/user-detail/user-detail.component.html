@@ -9,7 +9,7 @@
             <label for="Email">Email</label>
           </td>
           <td> 
-            <input type="text" id="email" name="email" [(ngModel)]="utilisateur.email" required>
+            <input type="text" id="email" name="email" [(ngModel)]="utilisateur.email" required [readonly]="traitementSuppressionOk">
           </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
             <label for="nom">Nom</label>
           </td>
           <td>
-            <input type="text" id="nom" name="nom" [(ngModel)]="utilisateur.nom" required>
+            <input type="text" id="nom" name="nom" [(ngModel)]="utilisateur.nom" required [readonly]="traitementSuppressionOk">
           </td>
         </tr>
         <tr>
@@ -25,7 +25,7 @@
             <label for="nom">Prénom</label>
           </td>
           <td>
-            <input type="text" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" required>
+            <input type="text" id="prenom" name="prenom" [(ngModel)]="utilisateur.prenom" required [readonly]="traitementSuppressionOk">
           </td>
         </tr>
         <tr>
@@ -33,14 +33,14 @@
             <label for="nom">Téléphone</label>
           </td>
           <td>
-            <input type="tel" id="telephone" name="telephone" [(ngModel)]="utilisateur.telephone" required>
+            <input type="tel" id="telephone" name="telephone" [(ngModel)]="utilisateur.telephone" required [readonly]="traitementSuppressionOk">
           </td>
         </tr>
         <tr>
           <td>
             <label for="nom">Équipe : {{ utilisateur.equipe }}</label>
           </td>
-          <td>
+          <td *ngIf = "!traitementSuppressionOk">
             <app-select-equipe (eventIdEquipeSelectionner) = "selectionnerEquipe($event)"></app-select-equipe>
           </td>
         </tr>
@@ -51,18 +51,24 @@
               <li class="list-group-item" *ngFor="let element of utilisateur.nomProjets">{{ element }}</li>
             </ul>
           </td>
-          <td>
+          <td *ngIf = "!traitementSuppressionOk">
             <app-select-projet (eventIdProjetSelectionner) = "selectionnerProjet($event)"></app-select-projet>
           </td>
         </tr>
     </table>
-    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="traitementSuppressionOk">Mettre à jour</button>
   </form>
+  <div class="position-relative">
+    <button (click)="deleteUser()" class="btn btn-danger position-absolute bottom-0 end-0" [disabled]="traitementSuppressionOk">Supprimer l'utilisateur</button>
+  </div>
 
+  <div class="alert alert-success" role="alert" *ngIf="traitementSuppressionOk">L'utilisateur a été correctement supprimer, vous pouvez retourner sur la page d'<a [routerLink]="'/'">accueil</a></div>
   <div class="alert alert-success" role="alert" *ngIf="traitementEquipeOk">L'équipe a été correctement associé, si les données ne sont pas à jour, merci de rafraichir la page</div>
   <div class="alert alert-success" role="alert" *ngIf="traitemenProjetOk">Le projet a été correctement associé, si les données ne sont pas à jour, merci de rafraichir la page</div>
   <div class="alert alert-success" role="alert" *ngIf="majUtilisateur && (traitementEquipeOk || traitementEquipeOk == null) && (traitemenProjetOk || traitemenProjetOk == null)">Les mises à jours ont été appliquées avec succès</div>
-  <div class="alert alert-danger" role="alert" *ngIf="(traitementEquipeOk == false) || (majUtilisateur == false)">Une erreur inconnue s'est produite</div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="(traitementEquipeOk == false) || (majUtilisateur == false) || (traitementSuppressionOk  == false)">Une erreur inconnue s'est produite</div>
   <div class="alert alert-danger" role="alert" *ngIf="traitemenProjetOk == false">Une erreur inconnue s'est produite, cela peut se produire si l'utilisateur appartient déjà au projet associé</div>
 </div>
   
