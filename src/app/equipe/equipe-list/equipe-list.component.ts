@@ -14,6 +14,13 @@ import { CommunService } from 'src/app/service/commun.service';
 })
 export class EquipeListComponent {
 
+  traitementSuppressionOk : boolean | null = null;
+
+  /**
+   * Liste d'id sur lesquels on a appliquer une suppression
+   */
+  idEquipeDelete : Array<number> = new Array<number>();
+
   listeEquipe : Array<Equipe> = new Array<Equipe>();
 
   private listeInscription : Array<Subscription> = new Array<Subscription>();
@@ -51,6 +58,24 @@ export class EquipeListComponent {
    */
   ngOnDestroy(){
     CommunService.ngOnDestroy(this.listeInscription);
+  }
+
+
+  deleteEquipe(idEquipe : number | null){
+    if (idEquipe!= null){
+      let inscription =this.authService.doDelete(`${API_URLS.TEAM_URL}/${idEquipe}`).subscribe(
+        (response :any) => {
+          this.traitementSuppressionOk = true;
+          this.idEquipeDelete.push(idEquipe);
+        },
+        (error :any) => {
+          console.error('Erreur lors de la requête :', error);
+          this.traitementSuppressionOk = false;
+          this.idEquipeDelete.push(idEquipe);
+        }
+      );
+      this.listeInscription.push(inscription);
+    }
   }
 
 }

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { CommunService } from './service/commun.service';
-import { Observable } from 'rxjs';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -15,7 +13,7 @@ export class AppComponent {
    * Observe l'evenement de connexion
    */
   loginUtilisateur : string | null = null;
-
+ 
   constructor(private authService : AuthService){
   }  
 
