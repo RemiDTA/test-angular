@@ -29,9 +29,9 @@
     <h2>Membres de l'équipe :</h2>
     <!-- On intègre le composant existant qui liste les utilisateurs en lui donnant une source de données qui est la liste des membres de l'équipe-->
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="equipe.listeUtilisateur"></app-user-list>
-    <button (click)="deleteEquipe(equipe.id)" class="btn btn-danger" [disabled]="traitementSuppressionOk && idEquipeDelete.includes(equipe.id)">Supprimer l'équipe</button>
-    <div class="alert alert-success" role="alert" *ngIf="traitementSuppressionOk && idEquipeDelete.includes(equipe.id)">L'équipe a été correctement supprimée</div>
-    <div class="alert alert-danger" role="alert" *ngIf="traitementSuppressionOk == false && idEquipeDelete.includes(equipe.id)">Une erreur inconnue s'est produite</div>
+    <button (click)="deleteEquipe(equipe.id)" class="btn btn-danger" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Supprimer l'équipe</button>
+    <div class="alert alert-success" role="alert" *ngIf="idEquipeDeleteReussi.includes(equipe.id)">L'équipe a été correctement supprimée</div>
+    <div class="alert alert-danger" role="alert" *ngIf="idEquipeDeleteRate.includes(equipe.id)">Une erreur inconnue s'est produite</div>
     <hr />
     <hr />
 </div>

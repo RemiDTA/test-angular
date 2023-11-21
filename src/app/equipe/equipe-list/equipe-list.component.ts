@@ -14,12 +14,15 @@ import { CommunService } from 'src/app/service/commun.service';
 })
 export class EquipeListComponent {
 
-  traitementSuppressionOk : boolean | null = null;
+  /**
+   * Liste d'id sur lesquels on a appliquer une suppression et qu'il n'y a pas eut d'erreur
+   */
+  idEquipeDeleteReussi : Array<number> = new Array<number>();
 
   /**
-   * Liste d'id sur lesquels on a appliquer une suppression
+   * Liste d'id sur lesquels on a appliquer une suppression mais qui a échoué
    */
-  idEquipeDelete : Array<number> = new Array<number>();
+  idEquipeDeleteRate : Array<number> = new Array<number>();
 
   listeEquipe : Array<Equipe> = new Array<Equipe>();
 
@@ -65,13 +68,11 @@ export class EquipeListComponent {
     if (idEquipe!= null){
       let inscription =this.authService.doDelete(`${API_URLS.TEAM_URL}/${idEquipe}`).subscribe(
         (response :any) => {
-          this.traitementSuppressionOk = true;
-          this.idEquipeDelete.push(idEquipe);
+          this.idEquipeDeleteReussi.push(idEquipe);
         },
         (error :any) => {
           console.error('Erreur lors de la requête :', error);
-          this.traitementSuppressionOk = false;
-          this.idEquipeDelete.push(idEquipe);
+          this.idEquipeDeleteRate.push(idEquipe);
         }
       );
       this.listeInscription.push(inscription);
