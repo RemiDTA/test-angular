@@ -1,5 +1,6 @@
 <h1>Liste des Projets</h1>
 <div *ngFor="let projet of listeProjet">
+    <hr />
     <table class= "table table-striped">
         <tbody>
             <tr>
@@ -21,6 +22,11 @@
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="projet.listeCollaborateurs"></app-user-list>
     <h2>Associer une équipe à ce projet</h2>
     <app-select-equipe (eventIdEquipeSelectionner) = "associerEquipeProjet($event, projet.id)"></app-select-equipe>
+    <button (click)="deleteProjet(projet.id)" class="btn btn-danger" [disabled]="idProjetDeleteReussi.includes(projet.id)">Supprimer le projet</button>
+    <div class="alert alert-success" role="alert" *ngIf="idProjetDeleteReussi.includes(projet.id)">Le projet a été correctement supprimée</div>
+    <div class="alert alert-danger" role="alert" *ngIf="idProjetDeleteRate.includes(projet.id)">Une erreur inconnue s'est produite</div>
+    <hr />
+    <hr />
 </div>
 <button class="btn btn-primary btn-sm" [disabled] ="!mapProjetEquipe.size" (click)="associerEquipeTousProjet()">Associer les équipes aux projets</button>
 <div class="alert alert-success" role="alert" *ngIf="traitementOk">Les équipes ont été correctement associées, si les données ne sont pas à jour, merci de rafraichir la page</div>

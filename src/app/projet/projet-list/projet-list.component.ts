@@ -18,6 +18,16 @@ export class ProjetListComponent {
   private listeInscription : Array<Subscription> = new Array<Subscription>();
 
   /**
+   * Liste d'id sur lesquels on a appliquer une suppression et qu'il n'y a pas eut d'erreur
+   */
+  idProjetDeleteReussi : Array<number> = new Array<number>();
+
+  /**
+   * Liste d'id sur lesquels on a appliquer une suppression mais qui a échoué
+   */
+  idProjetDeleteRate : Array<number> = new Array<number>();
+
+  /**
    * On a 3 cas : pas de traitement (null), traitement OK (true) et traitement KO (false)
    */
   traitementOk : boolean | null = null;
@@ -96,6 +106,21 @@ export class ProjetListComponent {
           }
         );
       };
+    }
+
+    deleteProjet(idProjet : number | null){
+      if (idProjet!= null){
+        let inscription =this.authService.doDelete(`${API_URLS.PROJET_URL}/${idProjet}`).subscribe(
+          (response :any) => {
+            this.idProjetDeleteReussi.push(idProjet);
+          },
+          (error :any) => {
+            console.error('Erreur lors de la requête :', error);
+            this.idProjetDeleteRate.push(idProjet);
+          }
+        );
+        this.listeInscription.push(inscription);
+      }
     }
 
 }
