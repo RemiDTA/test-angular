@@ -37,7 +37,12 @@ export const URL_FRONT = {
   
 }
 
-// Nom des variables utilisées dans le local
+// Variables utilisées dans le local storage
 export const LOCAL_STORAGE = {
+}
+
+// Variables technique
+export const TECHNIQUE = {
+  TAILLE_PAGINATION : 3
 }
 

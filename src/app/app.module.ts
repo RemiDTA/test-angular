@@ -13,11 +13,12 @@ import { ProjetListComponent } from './projet/projet-list/projet-list.component'
 import { EquipeListComponent } from './equipe/equipe-list/equipe-list.component';
 import { SelectEquipeComponent } from './equipe/selection/select-equipe/select-equipe.component';
 // Librairie de lookup
-import { DxLookupModule } from 'devextreme-angular';
+import { DxLookupModule, DxDataGridModule, DxDropDownBoxModule } from 'devextreme-angular';
 import { SelectProjetComponent } from './projet/selection/select-projet/select-projet.component';
 import { ProjetCreateComponent } from './projet/projet-create/projet-create.component';
 import { TeamCreateComponent } from './equipe/equipe-create/team-create.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
+import { SelectUserComponent } from './user/select-user/select-user.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +35,15 @@ import { UserCreateComponent } from './user/user-create/user-create.component';
     SelectProjetComponent,
     ProjetCreateComponent,
     TeamCreateComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    SelectUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Permet de gérer ngModel
     HttpClientModule, // Permet de gérer les requêtes HTTP
-    DxLookupModule // Gestion de lookup
+    DxLookupModule, DxDataGridModule, DxDropDownBoxModule // Gestion de lookup
   ],
   providers: [],
   bootstrap: [AppComponent]

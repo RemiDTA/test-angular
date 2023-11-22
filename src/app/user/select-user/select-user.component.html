@@ -1,0 +1,29 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-label">{{ label }}</div>
+    <div class="dx-field-value">
+      <dx-drop-down-box
+        [(value)]="utilisateurSelectionner"
+        displayExpr="email"
+        placeholder="Selection des utilisateurs"
+        [showClearButton]="true"
+        [dataSource]="listeUtilisateurs"
+        (onValueChanged)="modificationSelection($event)"
+      >
+        <div *dxTemplate="let data of 'content'">
+          <dx-data-grid
+            [dataSource]="listeUtilisateurs"
+            [columns]="['email', 'nom', 'prenom']"
+            [selection]="{ mode: 'multiple' }"
+            [hoverStateEnabled]="true"
+            [paging]="{ enabled: true, pageSize: 10 }"
+            [filterRow]="{ visible: true }"
+            [height]="345"
+            [(selectedRowKeys)]="utilisateurSelectionner"
+          >
+          </dx-data-grid>
+        </div>
+      </dx-drop-down-box>
+    </div>
+  </div>
+</div>

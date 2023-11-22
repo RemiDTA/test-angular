@@ -29,6 +29,12 @@
     <h2>Membres de l'équipe :</h2>
     <!-- On intègre le composant existant qui liste les utilisateurs en lui donnant une source de données qui est la liste des membres de l'équipe-->
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="equipe.listeUtilisateur"></app-user-list>
+    <div>
+        <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerUtilisateur($event, equipe.id)" [label]="'Selectionner des nouveaux membres de l\'équipe :'"></app-select-user>
+        <button (click)="associerUtilisateurSelect(equipe.id)" class="btn btn-primary" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Associer les nouveaux membres de l'équipe</button>
+        <div class="alert alert-success" role="alert" *ngIf="idAssociationUtilisateurReussi.includes(equipe.id)">Les membres selectionné ont été rajouté à l'équipe</div>
+        <div class="alert alert-danger" role="alert" *ngIf="idAssociationUtilisateurRate.includes(equipe.id)">Une erreur inconnue s'est produite</div>
+    </div>
     <button (click)="deleteEquipe(equipe.id)" class="btn btn-danger" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Supprimer l'équipe</button>
     <div class="alert alert-success" role="alert" *ngIf="idEquipeDeleteReussi.includes(equipe.id)">L'équipe a été correctement supprimée</div>
     <div class="alert alert-danger" role="alert" *ngIf="idEquipeDeleteRate.includes(equipe.id)">Une erreur inconnue s'est produite</div>
