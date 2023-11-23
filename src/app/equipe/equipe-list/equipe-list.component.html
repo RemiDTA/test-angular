@@ -20,17 +20,25 @@
                 <td>{{ equipe.dateCreation }}</td>
             </tr>
             <tr>
-                <td>Chef Equipe :</td>
+                <td>Chef Equipe :
+                    <br>
+                    <button (click)="associerChefEquipe(equipe.id)" class="btn btn-primary" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Affecter en tant que chef d'équipe</button>
+                </td>
                  <!-- Ici on intègre un autre composant, à savoir le user-detail concernant le chef d'équipe -->
-                <td>TODO</td>
+                <td>
+                    {{ equipe.chefEquipe?.email }}
+                    <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerChefEquipe($event, equipe.id)" [typeSelection] = "selectionSimple"></app-select-user>
+                </td>
             </tr>
         </tbody>
     </table>
+    <div class="alert alert-success" role="alert" *ngIf="idAssociationChefEquipeReussi.includes(equipe.id)">Le chef d'équipe selectionné a bien été associé</div>
+    <div class="alert alert-danger" role="alert" *ngIf="idAssociationChefEquipeRate.includes(equipe.id)">Une erreur s'est produite, vérifiez que le chef d'équipe selectionné appartient à l'équipe</div>
     <h2>Membres de l'équipe :</h2>
     <!-- On intègre le composant existant qui liste les utilisateurs en lui donnant une source de données qui est la liste des membres de l'équipe-->
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="equipe.listeUtilisateur"></app-user-list>
     <div>
-        <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerUtilisateur($event, equipe.id)" [label]="'Selectionner des nouveaux membres de l\'équipe :'"></app-select-user>
+        <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerMembreEquipe($event, equipe.id)" [label]="'Selectionner des nouveaux membres de l\'équipe :'" [typeSelection] = "selectionMultiple"></app-select-user>
         <button (click)="associerUtilisateurSelect(equipe.id)" class="btn btn-primary" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Associer les nouveaux membres de l'équipe</button>
         <div class="alert alert-success" role="alert" *ngIf="idAssociationUtilisateurReussi.includes(equipe.id)">Les membres selectionné ont été rajouté à l'équipe</div>
         <div class="alert alert-danger" role="alert" *ngIf="idAssociationUtilisateurRate.includes(equipe.id)">Une erreur inconnue s'est produite</div>

@@ -46,3 +46,7 @@ export const TECHNIQUE = {
   TAILLE_PAGINATION : 3
 }
 
+export const TYPE_SELECTION = {
+  SINGLE : { mode: 'single' },
+  MULTIPLE : { mode: 'multiple' }
+}

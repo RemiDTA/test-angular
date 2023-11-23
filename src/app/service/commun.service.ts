@@ -62,4 +62,17 @@ export class CommunService {
   static deleteUser(userId : number,authService : AuthService){
     return authService.doDelete(`${API_URLS.USER_URL}/${userId}`);
   }
+
+  /**
+   * Supprime d'un tableau la clef fournie en paramètre si celle-ci existe
+   * 
+   * @param tableau 
+   * @param clef 
+   */
+  static suppressionTableauSiExiste(tableau : Array<any>, clef : any){
+    let index = tableau.indexOf(clef);
+    if (index > -1) {
+      tableau.splice(index, 1);
+    }
+  }
 }

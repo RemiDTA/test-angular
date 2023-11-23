@@ -14,7 +14,7 @@
           <dx-data-grid
             [dataSource]="listeUtilisateurs"
             [columns]="['email', 'nom', 'prenom']"
-            [selection]="{ mode: 'multiple' }"
+            [selection]="typeSelection"
             [hoverStateEnabled]="true"
             [paging]="{ enabled: true, pageSize: 10 }"
             [filterRow]="{ visible: true }"
