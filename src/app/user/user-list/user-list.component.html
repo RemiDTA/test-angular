@@ -15,3 +15,12 @@
       </tr>
     </tbody>
 </table>
+<nav *ngIf="doitGererPagination">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" [ngClass]="{'disabled': pageCourante < 1}" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante - 1)}">Previous</a></li>
+    <li class="page-item"><a class="page-link" [routerLink]="'/user'">1</a></li>
+    <li class="page-item"><a class="page-link active" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" [ngClass]="{'disabled': listeUtilisateur.length < 3}" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante + 1)}">Next</a></li>
+  </ul>
+</nav>

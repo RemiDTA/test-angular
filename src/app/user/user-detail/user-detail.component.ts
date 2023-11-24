@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
-import { API_URLS, API_SOUS_URLS, URL_FRONT } from '../../constants';
+import { API_URLS, API_SOUS_URLS } from '../../constants';
 import { ActivatedRoute } from '@angular/router';
 import { forkJoin , Subscription } from 'rxjs';
 import {UtilisateurComplet} from '../../modele/UtilisateurComplet';
