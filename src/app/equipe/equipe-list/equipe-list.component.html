@@ -38,7 +38,7 @@
     <!-- On intègre le composant existant qui liste les utilisateurs en lui donnant une source de données qui est la liste des membres de l'équipe-->
     <app-user-list [doitRecupererTousUtilisateurs]="false" [listeUtilisateur]="equipe.listeUtilisateur"></app-user-list>
     <div>
-        <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerMembreEquipe($event, equipe.id)" [label]="'Selectionner des nouveaux membres de l\'équipe :'" [typeSelection] = "selectionMultiple"></app-select-user>
+        <app-select-user (eventListeIdUtilisateurSelectionner) = "selectionnerMembreEquipe($event, equipe.id)" [label]="'Selectionner de nouveaux membres :'" [typeSelection] = "selectionMultiple"></app-select-user>
         <button (click)="associerUtilisateurSelect(equipe.id)" class="btn btn-primary" [disabled]="idEquipeDeleteReussi.includes(equipe.id)">Associer les nouveaux membres de l'équipe</button>
         <div class="alert alert-success" role="alert" *ngIf="idAssociationUtilisateurReussi.includes(equipe.id)">Les membres selectionné ont été rajouté à l'équipe</div>
         <div class="alert alert-danger" role="alert" *ngIf="idAssociationUtilisateurRate.includes(equipe.id)">Une erreur inconnue s'est produite</div>

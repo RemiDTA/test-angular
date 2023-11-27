@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
-import { API_URLS, URL_FRONT } from '../../constants';
+import { API_URLS } from '../../constants';
 import {UtilisateurSimple} from '../../modele/UtilisateurSimple';
 import { ActivatedRoute } from '@angular/router';
 
@@ -30,7 +30,7 @@ export class UserListComponent {
    * permet de savoir si le composant doit réaliser de la pagination.
    * En effet, cela n'a aucun sens de faire de la pagination si le composant est appelé par un parent et que le parent fourni les données (à voir s'il existe d'autres cas)
    */
-  doitGererPagination : boolean = this.doitRecupererTousUtilisateurs;
+  doitGererPagination : boolean = false;
 
   pageCourante : number = -1;
 
