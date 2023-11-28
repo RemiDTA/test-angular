@@ -75,8 +75,8 @@ export class AuthService {
    */
   doPatch(url : string, body : any) {
     console.log("PATCH :", url, body);
-    let resultat = this.http.patch(url, body);
-    return resultat;
+    
+    return this.http.patch(url, body);
   }
 
   /**
