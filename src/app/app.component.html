@@ -13,21 +13,21 @@
       </button>
       <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-              <li *ngIf="loginUtilisateur" class="nav-item dropdown">
+              <li class="nav-item dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Utilisateur</a>
                   <div class="dropdown-menu">
                       <a [routerLink]="'/user'" class="dropdown-item">Liste des utilisateurs</a>
                       <a [routerLink]="'/userCreate'" class="dropdown-item">Créer un nouvel utilisateur</a>
                   </div>
               </li>
-              <li *ngIf="loginUtilisateur" class="nav-item dropdown">
+              <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Equipe</a>
                 <div class="dropdown-menu">
                     <a [routerLink]="'/team'" class="dropdown-item">Liste des équipes</a>
                     <a [routerLink]="'/teamCreate'" class="dropdown-item">Créer une nouvelle équipe</a>
                 </div>
             </li>
-            <li *ngIf="loginUtilisateur" class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Projet</a>
               <div class="dropdown-menu">
                   <a [routerLink]="'/projet'" class="dropdown-item">Liste des projets</a>
@@ -37,7 +37,7 @@
           </ul>
           <ul class="nav navbar-nav ms-auto">
             <li class="nav-item">
-              <a *ngIf="!loginUtilisateur" class="nav-link" [routerLink]="'/login'">Se connecter</a>
+              <a class="nav-link" [routerLink]="'/login'">Se connecter</a>
             </li>
           </ul>
       </div>
@@ -54,7 +54,7 @@
 
 <div class="bg-dark text-secondary px-4 py-5 text-center">
   <div class="py-5">
-    <h1 class="display-5 fw-bold text-white">Un jolie pied de ses pages</h1>
+    <h1 class="display-5 fw-bold text-white">Un joli pied de page</h1>
     <div class="col-lg-6 mx-auto">
       <p class="fs-5 mb-4">blbl du texte des adresses et téléphones pas à jour</p>
     </div>

@@ -21,8 +21,8 @@
     <li class="page-item" *ngIf="pageCourante > 2"><a class="page-link" [routerLink]="'/user'" [queryParams]="{pageDebut: 1}">1</a></li>
     <li class="page-item" *ngIf="pageCourante > 3"><a class="page-link">...</a></li>
     <li class="page-item" *ngIf="pageCourante > 1"><a class="page-link" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante - 1)}">{{(pageCourante - 1)}}</a></li>
-    <li class="page-item"><a class="page-link active" href="#">{{pageCourante}}</a></li>
-    <li class="page-item" *ngIf="listeUtilisateur.length === 3"><a class="page-link" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante + 1)}">{{(pageCourante + 1)}}</a></li>
+    <li class="page-item"><a class="page-link active" href="#">{{pageCourante + 1}}</a></li>
+    <li class="page-item" *ngIf="listeUtilisateur.length === 3"><a class="page-link" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante + 1)}">{{(pageCourante + 2)}}</a></li>
     <li class="page-item" *ngIf="listeUtilisateur.length === 3"><a class="page-link">...</a></li>
     <li class="page-item"><a class="page-link" [ngClass]="{'disabled': listeUtilisateur.length < 3}" [routerLink]="'/user'" [queryParams]="{pageDebut: (pageCourante + 1)}">Next</a></li>
   </ul>
